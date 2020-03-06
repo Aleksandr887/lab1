@@ -77,7 +77,7 @@ int main()
         exit(1);
     }
     Circles c[amount];
-    // Counter for feeling struct
+    // Counter for filling struct
     int i = 1;
     // Counter args
     int schet_err = 0;
