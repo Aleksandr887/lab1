@@ -98,17 +98,16 @@ int main()
                 exit(1);
             }
             if (i == 3) {
-                c[j].x = y;
-                j++;
-            } else if (i == 2)
-                c[j].y = y;
-            else {
                 if (y == 0) {
                     printf("Error: circle cannot have radius <= 0\n");
                     exit(1);
                 }
                 c[j].r = y;
-            }
+                j++;
+            } else if (i == 2)
+                c[j].y = y;
+            else
+                c[j].x = y;
             istr = strtok(NULL, sep);
             i++;
             schet_err++;
