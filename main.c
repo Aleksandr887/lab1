@@ -114,7 +114,7 @@ int main()
         }
     }
     // Comparing the number of entered args and max number of args
-    if (schet_err < amount * CircleArgs) {
+    if (schet_err != amount * CircleArgs) {
         printf("Error: invalid input format\n");
         exit(1);
     }
