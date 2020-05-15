@@ -1,25 +1,16 @@
+#include "func.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// Number of args for shapes
-const int CircleArgs = 3;
-
-typedef struct {
-    double x;
-    double y;
-    double r;
-} Circles;
-
-void max_len_amount_lines(int* amount, int* maxlen)
+void max_len_amount_lines(FILE* f, int* amount, int* maxlen)
 {
-    FILE* f = fopen("input.txt", "r");
     if (!f) {
         printf("File 'input.txt' is not found\n");
         exit(1);
     }
     char ch;
-    int counter_lines = 1;
+    int counter_lines = 0;
     int max = -1;
     int i = 0;
     while (1) {
@@ -36,12 +27,11 @@ void max_len_amount_lines(int* amount, int* maxlen)
     }
     *amount = counter_lines;
     *maxlen = max;
-    fclose(f);
+    fseek(f, 0, SEEK_SET);
 }
 
-void check_shape(int maxlen)
+void check_shape(FILE* f, int maxlen)
 {
-    FILE* f = fopen("input.txt", "r");
     if (!f) {
         printf("File 'input.txt' is not found\n");
         exit(1);
@@ -63,20 +53,11 @@ void check_shape(int maxlen)
             exit(1);
         }
     }
-    fclose(f);
+    fseek(f, 0, SEEK_SET);
 }
 
-int main()
+void parser(int maxlen, int amount, FILE* f, Circles* c)
 {
-    int amount, maxlen;
-    max_len_amount_lines(&amount, &maxlen);
-    check_shape(maxlen);
-    FILE* f = fopen("input.txt", "r");
-    if (!f) {
-        printf("File 'input.txt' is not found\n");
-        exit(1);
-    }
-    Circles c[amount];
     // Counter for filling struct
     int i = 1;
     // Counter args
@@ -114,14 +95,19 @@ int main()
         }
     }
     // Comparing the number of entered args and max number of args
-    if (schet_err != amount * CircleArgs) {
+    if (schet_err != amount * 3) {
         printf("Error: invalid input format\n");
         exit(1);
     }
-    // Data output
+}
+
+void PrintCircle(int amount, Circles* c)
+{
+    int i;
     for (i = 0; i < amount; i++) {
         printf("%d. Circle(%g %g, %g)\n", i + 1, c[i].x, c[i].y, c[i].r);
+        printf(" Perimeter = %g, Square = %g\n",
+               2 * 3.14 * c[i].r,
+               3.14 * c[i].r * c[i].r);
     }
-    fclose(f);
-    return 0;
 }
