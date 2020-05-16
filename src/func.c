@@ -1,4 +1,5 @@
 #include "func.h"
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -106,8 +107,23 @@ void PrintCircle(int amount, Circles* c)
     int i;
     for (i = 0; i < amount; i++) {
         printf("%d. Circle(%g %g, %g)\n", i + 1, c[i].x, c[i].y, c[i].r);
-        printf(" Perimeter = %g, Square = %g\n",
-               2 * 3.14 * c[i].r,
-               3.14 * c[i].r * c[i].r);
+        printf("\tPerimeter = %g\n\tArea = %g\n",
+               2 * 3.1415 * c[i].r,
+               3.1415 * c[i].r * c[i].r);
+        intersects(amount, i, c);
+    }
+}
+
+void intersects(int amount, int i, Circles* c)
+{
+    int j;
+    printf("\tIntersects:\n");
+    for (j = 0; j < amount; j++) {
+        if (i != j) {
+            if ((abs(sqrt(pow(c[i].x - c[j].x, 2) + pow(c[i].y - c[j].y, 2))))
+                <= (c[i].r + c[j].r)) {
+                printf("\t  %d. circle\n", j + 1);
+            }
+        }
     }
 }
