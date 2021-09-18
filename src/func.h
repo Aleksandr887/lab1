@@ -16,5 +16,6 @@ void check_shape(FILE* f, int maxlen);
 void parser(int maxlen, int amount, FILE* f, Circles* c);
 void PrintCircle(int amount, Circles* c);
 void intersects(int amount, int i, Circles* c);
+int quest();
 
 #endif
