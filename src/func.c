@@ -127,3 +127,11 @@ void intersects(int amount, int i, Circles* c)
         }
     }
 }
+
+int quest() 
+{
+    //you find it) 
+    //follow the link to youtube
+    //https://youtu.be/yNad1J1IpLc
+    return 0;
+}
